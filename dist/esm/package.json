@@ -1,0 +1,54 @@
+{
+  "name": "@mhc/watermark",
+  "version": "0.1.5",
+  "description": "给页面添加水印",
+  "main": "index.js",
+  "scripts": {
+    "pack": "cp package.json dist/esm/package.json && cp package-lock.json dist/esm/package-lock.json && cp README.md dist/esm/README.md",
+    "precompile": "rm -rf dist",
+    "compile": "gulp compile",
+    "postcompile": "npm run pack",
+    "prestart": "npm run compile && rm -rf test/*.js && cp dist/umd/*.js test",
+    "start": "http-server ./test --cors='*'",
+    "up2qiniu": "node ./build/scripts/upload.js qiniu",
+    "up2wantu": "node ./build/scripts/upload.js wantu",
+    "prerelease": "npm run compile",
+    "release": "cd dist/esm && npm publish",
+    "postrelease": "npm run up2wantu && npm run up2qiniu",
+    "bump:patch": "npm version patch && npm run release",
+    "bump:minor": "npm version minor && npm run release",
+    "bump:major": "npm version major && npm run release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@git.dawanju.net:mhc-fe/infrastructure/watermark.git"
+  },
+  "keywords": [
+    "watermark",
+    "encryption"
+  ],
+  "author": "zhangwenan <jquerytech@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://git.dawanju.net/mhc-fe/infrastructure/watermark/issues"
+  },
+  "peerDependencies": {
+    "@mhc/ntks": "^0.x"
+  },
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "http-server": "^0.11.1",
+    "rollup": "^0.56.5",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.2.0"
+  },
+  "dependencies": {
+    "@mhc/ntks": "0.0.6"
+  }
+}
