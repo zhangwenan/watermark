@@ -38,7 +38,7 @@
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-babel": "^6.1.2",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.0",
